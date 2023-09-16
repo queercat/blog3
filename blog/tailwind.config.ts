@@ -16,5 +16,13 @@ const config: Config = {
     },
   },
   plugins: [],
+  safelist: [
+    {
+      pattern: /bg-+/, // 👈  This includes bg of all colors and shades
+    },
+    {
+      pattern: /text-+/, // 👈  This includes text of all colors and shades
+    }
+  ],
 }
 export default config
