@@ -1,6 +1,16 @@
+@font-face {
+  font-family: "Comic Mono";
+  src: url("/fonts/ComicMono.ttf");
+}
+
+* {
+  font-family: "Comic Mono", monospace;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 html, body {
   height: 100%;
 }

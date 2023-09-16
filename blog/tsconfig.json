@@ -32,6 +32,9 @@
       "@types/*": [
         "./src/types/*"
       ],
+      "@utilities/*": [
+        "./src/utilities/*"
+      ],
     }
   },
   "include": [
