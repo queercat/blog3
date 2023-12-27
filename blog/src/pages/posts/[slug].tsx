@@ -35,8 +35,7 @@ export const getStaticProps = async (context: any) => {
     "r"
   );
 
-  let source = await fd.readFile("utf-8");
-  fd.close();
+  let source = await fs.readFile(fd, "utf-8");
 
   // check for frontmatter
   const match = source.match(/---(\s|\S)+---/g);
