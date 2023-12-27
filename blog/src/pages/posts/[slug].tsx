@@ -1,11 +1,14 @@
+"use client";
 import { serialize } from "next-mdx-remote/serialize";
 
-import fs from "fs/promises";
+import { promises as fs } from "fs";
 import path from "path";
 import { useMDXComponents } from "../../mdx-components";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { THEME } from "../../theme";
 import { MakeClass } from "../../utilities/MakeClass";
+import MDXContent from "../../components/MDXContent";
+import { useMemo } from "react";
 
 export const getStaticPaths = async () => {
   let result = await fs.readdir(path.join(process.cwd(), "src/posts"));
@@ -58,7 +61,12 @@ export const getStaticProps = async (context: any) => {
     source = newLines.join("\n");
   }
 
-  const result = await serialize(source);
+  const result = await serialize(source, {
+    mdxOptions: {
+      remarkPlugins: [],
+      rehypePlugins: [],
+    },
+  });
 
   return {
     props: {
@@ -68,6 +76,11 @@ export const getStaticProps = async (context: any) => {
 };
 
 export default function Page({ source }: { source: MDXRemoteSerializeResult }) {
+  let MDXElement = useMemo(() => {
+    if (!source) return null;
+    return <MDXRemote {...source} components={useMDXComponents()} />;
+  }, [source]);
+
   return (
     <div
       className={MakeClass(
@@ -76,9 +89,7 @@ export default function Page({ source }: { source: MDXRemoteSerializeResult }) {
         THEME.colors.textPrimary
       )}
     >
-      <>
-        <MDXRemote components={useMDXComponents()} {...source} />
-      </>
+      {MDXElement}
     </div>
   );
 }
