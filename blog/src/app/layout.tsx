@@ -1,5 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
+import { MakeClass } from "../utilities/MakeClass";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -13,7 +15,27 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={""}>{children}</body>
+      <body className="flex flex-col">
+        <div
+          className={MakeClass(
+            "flex",
+            "justify-center",
+            "bg-neutral-900 p-4",
+            "gap-4",
+            "text-neutral-100",
+            "text-lg font-bold lg:text-2xl"
+          )}
+        >
+          <Link href={"/"}>home</Link>
+          <p> - </p>
+          <Link href={"/posts"}>posts</Link>
+          <p> - </p>
+          <Link href={"/tools"}>tools</Link>
+          <p> - </p>
+          <Link href={"/scripts"}>scripts</Link>
+        </div>
+        {children}
+      </body>
     </html>
   );
 }
