@@ -1,4 +1,3 @@
-import { GetServerSidePropsContext } from "next";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 
@@ -7,8 +6,8 @@ import path from "path";
 import { MakeClass } from "../../../utilities/MakeClass";
 import { THEME } from "../../../theme";
 
-export default async function Page(context: GetServerSidePropsContext) {
-  let fd: fs.FileHandle = undefined;
+export default async function Page(context: any) {
+  let fd: fs.FileHandle;
 
   try {
     fd = await fs.open(
@@ -16,7 +15,6 @@ export default async function Page(context: GetServerSidePropsContext) {
       "r"
     );
   } catch (e) {
-    fd.close();
     return notFound();
   }
 
@@ -34,9 +32,9 @@ export default async function Page(context: GetServerSidePropsContext) {
       <>
         <MDXRemote
           components={{
-            h1: (props) => <h1 {...props} className="text-2xl" />,
-            hr: (props) => <hr {...props} className="pb-4 mt-2" />,
-            Example: (props) => {
+            h1: (props: any) => <h1 {...props} className="text-2xl" />,
+            hr: (props: any) => <hr {...props} className="pb-4 mt-2" />,
+            Example: (props: any) => {
               return (
                 <div
                   className={MakeClass(
