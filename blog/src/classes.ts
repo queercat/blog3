@@ -1,5 +1,5 @@
-import { TailwindColor, ValidTailwindColor } from "../../types/Tailwind";
-import { MakeClass } from "../../utilities/MakeClass";
+import { TailwindColor, ValidTailwindColor } from "./types/Tailwind";
+import { MakeClass } from "./utilities/MakeClass";
 
 const Snappy = (target: string) => MakeClass(`${target} duration-[250ms]`)
 const HoverBorder =  (color: `hover:border-${ValidTailwindColor}`) => MakeClass(Snappy("transition-colors"), color);

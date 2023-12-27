@@ -3,7 +3,7 @@ import { CLASS } from "../constants/classes";
 import { THEME } from "../constants/theme";
 import { MakeClass } from "../utilities/MakeClass";
 
-export default function Home() {
+export default function Page() {
   const mainClass = MakeClass(
     CLASS.Full,
     CLASS.Center,
