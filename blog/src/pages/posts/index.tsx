@@ -1,13 +1,14 @@
-import fs from "fs/promises";
-import { compileMDX } from "next-mdx-remote/rsc";
-import path from "path";
-import { parse } from "yaml";
+import { useRouter } from "next/router";
 import { MakeClass } from "../../utilities/MakeClass";
 import { THEME } from "../../theme";
 import { CLASS } from "../../classes";
+
+import path from "path";
+import { parse } from "yaml";
+import fs from "fs/promises";
 import Link from "next/link";
 
-export default async function Page() {
+export const getStaticProps = async () => {
   let result = await fs.readdir(path.join(process.cwd(), "src/posts"));
 
   // filter to mdx only
@@ -33,10 +34,29 @@ export default async function Page() {
     };
   });
 
+  return {
+    props: {
+      posts,
+    },
+  };
+};
+
+const calculateDateDifference = (date: string) => {
+  const now = new Date();
+  const then = new Date(date);
+
+  const diff = now.getTime() - then.getTime();
+
+  const days = diff / (1000 * 60 * 60 * 24);
+
+  return Math.round(days);
+};
+
+export default function Page(context: { posts: any[] }) {
   return (
     <div className={MakeClass(THEME.colors.bgPrimary, CLASS.Full)}>
       <div className="flex flex-col gap-4 p-4">
-        {posts.map((p) => {
+        {context.posts?.map((p) => {
           return (
             <Link
               className={MakeClass(
@@ -44,12 +64,18 @@ export default async function Page() {
                 "p-4",
                 "rounded",
                 "shadow-lg",
-                THEME.colors.textPrimary
+                THEME.colors.textPrimary,
+                CLASS.Snappy("transition-transform"),
+                "hover:scale-[101%]"
               )}
               href={`/posts/${p.slug}`}
+              key={p.slug}
             >
               <h1 className="text-2xl">{p.title}</h1>
-              <p>{p.date}</p>
+              <div className="flex justify-between">
+                <p>{p.date}</p>
+                <p>{calculateDateDifference(p.date)} days ago</p>
+              </div>
             </Link>
           );
         })}

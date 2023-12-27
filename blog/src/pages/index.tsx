@@ -21,6 +21,7 @@ export default function Page() {
           "flex flex-col items-center gap-4",
           "p-4",
           `${THEME.colors.bgSecondary}`,
+          "rounded-lg",
           "drop-shadow-lg"
         )}
       >
