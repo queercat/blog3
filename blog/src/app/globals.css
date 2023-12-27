@@ -7,6 +7,10 @@
   font-family: "Comic Mono", monospace;
 }
 
+.monospace {
+  font-family: "Monospace", monospace;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
