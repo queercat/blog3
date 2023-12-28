@@ -25,7 +25,7 @@ export const getStaticPaths = async () => {
         },
       };
     }),
-    fallback: true,
+    fallback: false,
   };
 };
 
@@ -37,34 +37,12 @@ export const getStaticProps = async (context: any) => {
 
   let source = await fs.readFile(fd, "utf-8");
 
-  // check for frontmatter
-  const match = source.match(/---(\s|\S)+---/g);
-
-  if (match) {
-    // regex replace doesn't work here for some reason
-    let lines = source.split("\n");
-
-    let newLines = [];
-    let idx = 0;
-
-    for (const line of lines) {
-      if (line.includes("---")) {
-        idx++;
-      }
-
-      if (idx > 1) {
-        newLines.push(line);
-      }
-    }
-
-    source = newLines.join("\n");
-  }
-
   const result = await serialize(source, {
     mdxOptions: {
       remarkPlugins: [],
       rehypePlugins: [],
     },
+    parseFrontmatter: true,
   });
 
   return {
