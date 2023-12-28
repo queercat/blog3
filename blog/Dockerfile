@@ -10,6 +10,5 @@ ENV NODE_ENV=production
 RUN bun install
 RUN bun run build
 
-# Caddy
-FROM caddy:2-alpine AS caddy
-COPY --from=base /usr/src/app/out /usr/share/caddy
+FROM pierrezemb/gostatic
+COPY --from=base /usr/src/app/out /srv/http
