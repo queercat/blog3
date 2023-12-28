@@ -7,6 +7,7 @@ import path from "path";
 import { parse } from "yaml";
 import fs from "fs/promises";
 import Link from "next/link";
+import { NextSeo } from "next-seo";
 
 export const getStaticProps = async () => {
   let result = await fs.readdir(path.join(process.cwd(), "src/posts"));
@@ -56,6 +57,7 @@ const calculateDateDifference = (date: string) => {
 export default function Page(context: { posts: any[] }) {
   return (
     <div className={MakeClass(THEME.colors.bgPrimary, CLASS.Full)}>
+      <NextSeo title="some posts" />
       <div className="flex flex-col gap-4 p-4">
         {context.posts?.map((p) => {
           return (

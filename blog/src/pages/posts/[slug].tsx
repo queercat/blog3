@@ -9,6 +9,8 @@ import { THEME } from "../../theme";
 import { MakeClass } from "../../utilities/MakeClass";
 import MDXContent from "../../components/MDXContent";
 import { useMemo } from "react";
+import { parse } from "yaml";
+import { NextSeo } from "next-seo";
 
 export const getStaticPaths = async () => {
   let result = await fs.readdir(path.join(process.cwd(), "src/posts"));
@@ -37,6 +39,9 @@ export const getStaticProps = async (context: any) => {
 
   let source = await fs.readFile(fd, "utf-8");
 
+  const frontmatter = source.match(/---[\s\S]*---/g);
+  const parsed = parse(frontmatter[0].replace(/---/g, ""));
+
   const result = await serialize(source, {
     mdxOptions: {
       remarkPlugins: [],
@@ -48,16 +53,22 @@ export const getStaticProps = async (context: any) => {
   return {
     props: {
       source: result,
+      frontmatter: JSON.stringify(parsed),
     },
   };
 };
 
-export default function Page({ source }: { source: MDXRemoteSerializeResult }) {
+export default function Page({
+  source,
+  frontmatter,
+}: {
+  source: MDXRemoteSerializeResult;
+  frontmatter: string;
+}) {
   let MDXElement = useMemo(() => {
     if (!source) return null;
     return <MDXRemote {...source} components={useMDXComponents()} />;
   }, [source]);
-
   return (
     <div
       className={MakeClass(
@@ -66,6 +77,10 @@ export default function Page({ source }: { source: MDXRemoteSerializeResult }) {
         THEME.colors.textPrimary
       )}
     >
+      <NextSeo
+        title={JSON.parse(frontmatter).title}
+        description={JSON.parse(frontmatter).description}
+      />
       {MDXElement}
     </div>
   );

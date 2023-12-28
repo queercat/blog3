@@ -1,3 +1,4 @@
+import { NextSeo } from "next-seo";
 import { BragCard } from "../components/BragCard";
 import { Emphasis } from "../components/Emphasis";
 import { Icon } from "../components/Icon";
@@ -15,6 +16,7 @@ export default function Page() {
 
   return (
     <main className={mainClass}>
+      <NextSeo title="a blog" />
       <div
         className={MakeClass(
           CLASS.Full,
