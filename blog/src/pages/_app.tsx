@@ -7,7 +7,7 @@ import { THEME } from "../theme";
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <div
-      className={MakeClass("flex flex-col h-full", THEME.colors.textPrimary)}
+      className={MakeClass("flex h-full flex-col ", THEME.colors.textPrimary)}
     >
       <div
         className={MakeClass(

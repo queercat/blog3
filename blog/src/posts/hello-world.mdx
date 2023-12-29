@@ -1,10 +1,13 @@
 ---
-title: Hello World
-description: This is a description
-date: 01-01-2023
+title: statistical regression
+description: what da heck is regression
+date: 12-27-2023
 slug: hello-world
-tags: "yada,lada"
+tags: "statistics"
 ---
+
+import { ScatterChart } from "../components/ScatterChart"
+import { THEME } from "../constants/theme"
 
 # # Hello World
 
@@ -12,5 +15,41 @@ tags: "yada,lada"
 
 **test**
 
-<Example>hello world</Example>
-<Counter />
+<ScatterChart 
+options={{
+  color: "0",
+  borderColor: "0",
+  backgroundColor: "0"
+}}
+ data={{
+  datasets: [
+    {
+      label: 'Scatter Dataset',
+      data: [
+        {
+          x: -10,
+          y: 5
+        }
+      ]
+    }
+  ]
+}}/>
+<ScatterChart 
+options={{
+  color: "0",
+  borderColor: "0",
+  backgroundColor: "0"
+}}
+ data={{
+  datasets: [
+    {
+      label: 'Scatter Dataset',
+      data: [
+        {
+          x: -10,
+          y: 5
+        }
+      ]
+    }
+  ]
+}}/>
