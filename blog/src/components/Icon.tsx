@@ -18,7 +18,7 @@ export const Icon: React.FC<IconProps> = ({
     // eslint-disable-next-line @next/next/no-img-element
     <img
       style={{
-        width: width,
+        width: `clamp(50px, ${width}, 200px)`,
         height: "fit-content",
         borderRadius: borderRadius,
       }}
@@ -27,7 +27,8 @@ export const Icon: React.FC<IconProps> = ({
         "border-solid",
         THEME.colors.borderPrimary,
         CLASS.Snappy("transition-[colors,transform]"),
-        CLASS.Snirk
+        CLASS.Snirk,
+        "shadow-lg"
       )}
       src={src}
       alt="Icon"

@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Comic Mono";
+  src: url("/fonts/ComicMono.ttf");
+}
+
+@font-face {
+  font-family: "Dina";
+  src: url("/fonts/Dina.ttf");
+}
+
+@font-face {
+  font-family: "Ubuntu";
+  src: url("/fonts/Ubuntu/Ubuntu-Regular.ttf");
+}
+
+* {
+  font-family: "Ubuntu", sans-serif;
+}
+
+a {
+  text-decoration: underline;
+  text-decoration-color: #606dbc;
+}
+
+.monospace {
+  font-family: "Dina", monospace;
+}
+
+html,
+body,
+#__next {
+  height: 100%;
+}
+
+.bg-stripes {
+  background: repeating-linear-gradient(
+    45deg,
+    #606dbc,
+    #606dbc 10px,
+    #465298 10px,
+    #465298 20px
+  );
+}
