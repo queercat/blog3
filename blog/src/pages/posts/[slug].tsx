@@ -7,11 +7,10 @@ import { useMDXComponents } from "../../mdx-components";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { THEME } from "../../theme";
 import { MakeClass } from "../../utilities/MakeClass";
-import MDXContent from "../../components/MDXContent";
 import { useMemo } from "react";
-import { parse } from "yaml";
 import { NextSeo } from "next-seo";
 import matter from "gray-matter";
+import MDXContent from "../../components/MDXContent";
 
 export const getStaticPaths = async () => {
   let result = await fs.readdir(path.join(process.cwd(), "src/posts"));
@@ -71,7 +70,7 @@ export default function Page({
   // hacky thing to handle undefined source.
   let MDXElement = useMemo(() => {
     if (!source) return null;
-    return <MDXRemote {...source} components={useMDXComponents()} />;
+    return <MDXContent source={source} />;
   }, [source]);
   return (
     <div

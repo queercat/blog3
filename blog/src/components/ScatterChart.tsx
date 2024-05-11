@@ -10,9 +10,9 @@ import {
 } from "chart.js";
 import { MakeClass } from "../utilities/MakeClass";
 
-export const ScatterChart = (
-  props: React.ComponentPropsWithRef<typeof Scatter>
-) => {
+export const ScatterChart = ({
+  ...props
+}: React.ComponentPropsWithRef<typeof Scatter>) => {
   ChartJS.register(LinearScale, PointElement, LineElement, Tooltip, Legend);
 
   return (
