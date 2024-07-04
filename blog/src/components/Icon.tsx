@@ -27,7 +27,8 @@ export const Icon: React.FC<IconProps> = ({
         "border-solid",
         THEME.colors.borderPrimary,
         CLASS.Snappy("transition-[colors,transform]"),
-        CLASS.Snirk
+        CLASS.Snirk,
+        "shadow-lg"
       )}
       src={src}
       alt="Icon"

@@ -5,6 +5,8 @@ import fs from "fs/promises";
 import path from "path";
 import { MakeClass } from "../../../utilities/MakeClass";
 import { THEME } from "../../../theme";
+import { Icon } from "../../../components/Icon";
+import { COMPONENTS } from "../../../constants/mdxComponents";
 
 export default async function Page(context: any) {
   let fd: fs.FileHandle;
@@ -31,27 +33,7 @@ export default async function Page(context: any) {
     >
       <>
         <MDXRemote
-          components={{
-            h1: (props: any) => <h1 {...props} className="text-2xl" />,
-            hr: (props: any) => <hr {...props} className="pb-4 mt-2" />,
-            Example: (props: any) => {
-              return (
-                <div
-                  className={MakeClass(
-                    "flex flex-col gap-4",
-                    "p-4",
-                    "my-4",
-                    THEME.colors.bgSecondary,
-                    "rounded",
-                    "shadow-lg",
-                    "monospace"
-                  )}
-                >
-                  {props.children}
-                </div>
-              );
-            },
-          }}
+          components={COMPONENTS}
           source={result}
           options={{
             parseFrontmatter: true,
