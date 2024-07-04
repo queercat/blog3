@@ -68,6 +68,7 @@ export default function Page({
   source: MDXRemoteSerializeResult;
   frontmatter: string;
 }) {
+  // hacky thing to handle undefined source.
   let MDXElement = useMemo(() => {
     if (!source) return null;
     return <MDXRemote {...source} components={useMDXComponents()} />;
