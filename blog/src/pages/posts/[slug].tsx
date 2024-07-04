@@ -11,6 +11,7 @@ import MDXContent from "../../components/MDXContent";
 import { useMemo } from "react";
 import { parse } from "yaml";
 import { NextSeo } from "next-seo";
+import matter from "gray-matter";
 
 export const getStaticPaths = async () => {
   let result = await fs.readdir(path.join(process.cwd(), "src/posts"));
@@ -39,8 +40,7 @@ export const getStaticProps = async (context: any) => {
 
   let source = await fs.readFile(fd, "utf-8");
 
-  const frontmatter = source.match(/---[\s\S]*---/g);
-  const parsed = parse(frontmatter[0].replace(/---/g, ""));
+  const frontmatter = matter(source).data;
 
   const result = await serialize(source, {
     mdxOptions: {
@@ -53,7 +53,7 @@ export const getStaticProps = async (context: any) => {
   return {
     props: {
       source: result,
-      frontmatter: JSON.stringify(parsed),
+      frontmatter: JSON.stringify(frontmatter),
     },
   };
 };

@@ -1,10 +1,9 @@
-import { useRouter } from "next/router";
 import { MakeClass } from "../../utilities/MakeClass";
 import { THEME } from "../../theme";
 import { CLASS } from "../../classes";
+import matter from "gray-matter";
 
 import path from "path";
-import { parse } from "yaml";
 import fs from "fs/promises";
 import Link from "next/link";
 import { NextSeo } from "next-seo";
@@ -22,17 +21,13 @@ export const getStaticProps = async () => {
   );
 
   const posts = result.map((p) => {
-    const match = p.match(/---[\s\S]*---/g);
-
-    if (!match) throw new Error("No frontmatter found");
-
-    const frontmatter = parse(match[0].replace(/---/g, ""));
+    const frontmatter = matter(p).data;
 
     return {
       title: frontmatter.title,
       date: frontmatter.date,
       slug: frontmatter.slug ?? "",
-      tags: frontmatter.tags ?? "",
+      tags: frontmatter.tags.split(",") ?? "",
     };
   });
 
@@ -76,7 +71,7 @@ export default function Page(context: { posts: any[] }) {
               <div className="flex justify-between">
                 <p className="text-2xl">{p.title}</p>
                 <div className="flex gap-2">
-                  {p.tags?.map((t) => {
+                  {p.tags?.map((t: string) => {
                     return (
                       <p key={p} className="text-sm">
                         #{t}
