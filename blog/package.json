@@ -31,5 +31,9 @@
   "devDependencies": {
     "@types/mdx": "^2.0.10",
     "@types/react-syntax-highlighter": "^15.5.11"
+  },
+  "overrides": {
+    "@mdx-js/mdx": "2.1.5",
+    "@mdx-js/react": "2.1.5"
   }
 }

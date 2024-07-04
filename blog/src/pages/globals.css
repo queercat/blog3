@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @font-face {
   font-family: "Comic Mono";
   src: url("/fonts/ComicMono.ttf");
@@ -10,10 +14,6 @@
 .monospace {
   font-family: "Monospace", monospace;
 }
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 html,
 body,
