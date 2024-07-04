@@ -2,9 +2,7 @@ import type { Config } from 'tailwindcss'
 
 const config: Config = {
   content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/**/*.{tsx,ts,mdx}',
   ],
   theme: {
     extend: {
@@ -17,12 +15,9 @@ const config: Config = {
   },
   plugins: [],
   safelist: [
-    {
-      pattern: /bg-+/, // 👈  This includes bg of all colors and shades
-    },
-    {
-      pattern: /text-+/, // 👈  This includes text of all colors and shades
-    }
-  ],
+    {pattern: /bg-./},
+    {pattern: /text-./},
+    {pattern: /border-./, variants: ['hover']},
+  ]
 }
 export default config
