@@ -11,7 +11,7 @@
     "strict": true,
     "noEmit": true,
     "esModuleInterop": true,
-    "module": "esnext",
+    "module": "ESNext",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -21,24 +21,14 @@
       {
         "name": "next"
       }
-    ],
-  },
-  "mdx": {
-    "plugins": [
-      [
-        "remark-frontmatter",
-        ["toml", "yaml"]
-      ],
-      "remark-gfm"
     ]
   },
+  "exclude": [
+    "node_modules"
+  ],
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts"
-, "next.config.js", "src/posts/Lorem Ipsum/Lorem Ipsum.mdx"  ],
-  "exclude": [
-    "node_modules"
+    "**/*.tsx"
   ]
 }

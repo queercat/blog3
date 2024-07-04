@@ -48,6 +48,9 @@ export const getStaticProps = async (context: any) => {
       rehypePlugins: [],
     },
     parseFrontmatter: true,
+    scope: {
+      THEME,
+    },
   });
 
   return {
@@ -72,7 +75,8 @@ export default function Page({
   return (
     <div
       className={MakeClass(
-        "full h-full px-4 lg:px-[20%] pt-4",
+        "px-4 lg:px-[20%] pt-4",
+        "flex-grow",
         THEME.colors.bgPrimary,
         THEME.colors.textPrimary
       )}
