@@ -75,7 +75,11 @@ export default function Page(context: { posts: any[] }) {
                 <p className="text-2xl">{p.title}</p>
                 <div className="flex gap-2">
                   {p.tags?.map((t) => {
-                    return <p className="text-sm">#{t}</p>;
+                    return (
+                      <p key={p} className="text-sm">
+                        #{t}
+                      </p>
+                    );
                   })}
                 </div>
               </div>
