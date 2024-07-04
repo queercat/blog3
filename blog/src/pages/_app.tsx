@@ -22,9 +22,9 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         <Link href={"/"}>home</Link>
         <p> - </p>
         <Link href={"/posts"}>posts</Link>
-        {/* <p> - </p>
+        {/* {/* <p> - </p> */}
         <Link href={"/tools"}>tools</Link>
-        <p> - </p>
+        {/* <p> - </p>
         <Link href={"/scripts"}>scripts</Link> */}
       </div>
       {Component && <Component {...pageProps} />}

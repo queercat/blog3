@@ -1,40 +1,17 @@
 import { MakeClass } from "../../utilities/MakeClass";
 import { THEME } from "../../theme";
 import { CLASS } from "../../classes";
-import matter from "gray-matter";
 
-import path from "path";
-import fs from "fs/promises";
 import Link from "next/link";
 import { NextSeo } from "next-seo";
+import { parseMdxPostsFromPath } from "../../utilities/parseMdxPostsFromPath";
+import { Post } from "../../types/Post";
 
-export const getStaticProps = async () => {
-  let result = await fs.readdir(path.join(process.cwd(), "src/posts"));
-
-  // filter to mdx only
-  result = result.filter((f) => f.includes(".mdx"));
-
-  result = await Promise.all(
-    result.map((f) => {
-      return fs.readFile(path.join(process.cwd(), "src/posts", f), "utf-8");
-    })
-  );
-
-  const posts = result.map((p) => {
-    const frontmatter = matter(p).data;
-
-    return {
-      title: frontmatter.title,
-      date: frontmatter.date,
-      slug: frontmatter.slug ?? "",
-      tags: frontmatter.tags.split(",") ?? "",
-    };
-  });
+export const getStaticProps = async (): Promise<Post[]> => {
+  const posts = (await parseMdxPostsFromPath("src/posts")).props.posts;
 
   return {
-    props: {
-      posts,
-    },
+    posts,
   };
 };
 
@@ -49,7 +26,10 @@ const calculateDateDifference = (date: string) => {
   return Math.round(days);
 };
 
-export default function Page(context: { posts: any[] }) {
+export default function Page(context: {
+  // TODO: Replace any with a more specific type.
+  posts: Post[];
+}) {
   return (
     <div className={MakeClass(THEME.colors.bgPrimary, CLASS.Full)}>
       <NextSeo title="some posts" />
@@ -73,7 +53,7 @@ export default function Page(context: { posts: any[] }) {
                 <div className="flex gap-2">
                   {p.tags?.map((t: string) => {
                     return (
-                      <p key={p} className="text-sm">
+                      <p key={t} className="text-sm">
                         #{t}
                       </p>
                     );
