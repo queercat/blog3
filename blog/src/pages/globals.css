@@ -7,12 +7,27 @@
   src: url("/fonts/ComicMono.ttf");
 }
 
+@font-face {
+  font-family: "Dina";
+  src: url("/fonts/Dina.ttf");
+}
+
+@font-face {
+  font-family: "Ubuntu";
+  src: url("/fonts/Ubuntu/Ubuntu-Regular.ttf");
+}
+
 * {
-  font-family: "Comic Mono", monospace;
+  font-family: "Ubuntu", sans-serif;
+}
+
+a {
+  text-decoration: underline;
+  text-decoration-color: #606dbc;
 }
 
 .monospace {
-  font-family: "Monospace", monospace;
+  font-family: "Dina", monospace;
 }
 
 html,
