@@ -35,9 +35,28 @@ export const getStaticProps = async (context: any) => {
   let source = await fd.readFile("utf-8");
   fd.close();
 
-  // check if contains frontmatter
+  // check for frontmatter
+  const match = source.match(/---(\s|\S)+---/g);
 
-  const lines = source.split("\n");
+  if (match) {
+    // regex replace doesn't work here for some reason
+    let lines = source.split("\n");
+
+    let newLines = [];
+    let idx = 0;
+
+    for (const line of lines) {
+      if (line.includes("---")) {
+        idx++;
+      }
+
+      if (idx > 1) {
+        newLines.push(line);
+      }
+    }
+
+    source = newLines.join("\n");
+  }
 
   const result = await serialize(source);
 
