@@ -7,12 +7,10 @@ import { NextSeo } from "next-seo";
 import { parseMdxPostsFromPath } from "../../utilities/parseMdxPostsFromPath";
 import { Post } from "../../types/Post";
 
-export const getStaticProps = async (): Promise<Post[]> => {
-  const posts = (await parseMdxPostsFromPath("src/posts")).props.posts;
+export const getStaticProps = async () => {
+  const posts = await parseMdxPostsFromPath("src/posts");
 
-  return {
-    posts,
-  };
+  return posts;
 };
 
 const calculateDateDifference = (date: string) => {
@@ -26,15 +24,14 @@ const calculateDateDifference = (date: string) => {
   return Math.round(days);
 };
 
-export default function Page(context: {
-  // TODO: Replace any with a more specific type.
-  posts: Post[];
-}) {
+export default function Page(
+  context: Awaited<ReturnType<typeof getStaticProps>>
+) {
   return (
     <div className={MakeClass(THEME.colors.bgPrimary, CLASS.Full)}>
       <NextSeo title="some posts" />
       <div className="flex flex-col gap-4 p-4">
-        {context.posts?.map((p) => {
+        {context.props.posts?.map((p) => {
           return (
             <Link
               className={MakeClass(
