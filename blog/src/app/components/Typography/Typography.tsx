@@ -2,7 +2,7 @@ import {
   TailwindColor,
   TailwindShade,
   TailwindSize,
-} from "@/app/types/Tailwind";
+} from "@/app/types/tailwind";
 import React, { PropsWithChildren, ReactElement, ReactNode } from "react";
 
 interface TypographyProps extends PropsWithChildren {
