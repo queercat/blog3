@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { MakeClass } from "../utilities/MakeClass";
 import { CLASS } from "../constants/classes";
+import { THEME } from "../constants/theme";
 
 interface IconProps {
   src: string;
@@ -24,9 +25,9 @@ export const Icon: React.FC<IconProps> = ({
       className={MakeClass(
         "border-4",
         "border-solid",
-        "border-neutral-300",
-        CLASS.Snappy("colors", "transform"),
-        CLASS.HoverBorder("rose-400")
+        THEME.colors.borderPrimary,
+        CLASS.Snappy("transition-[colors,transform]"),
+        CLASS.Snirk
       )}
       src={src}
       alt="Icon"

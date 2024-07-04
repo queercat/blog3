@@ -22,20 +22,6 @@
         "name": "next"
       }
     ],
-    "paths": {
-      "@/*": [
-        "./src/*"
-      ],
-      "@components/*": [
-        "./src/components/*"
-      ],
-      "@types/*": [
-        "./src/types/*"
-      ],
-      "@utilities/*": [
-        "./src/utilities/*"
-      ],
-    }
   },
   "include": [
     "next-env.d.ts",

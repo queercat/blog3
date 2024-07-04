@@ -13,9 +13,3 @@ test("Should generate correct class string from input with recursion.", () => {
 
   expect(result).toBe("flex justify-center items-center")
 })
-
-test("Snappy should handle variadic arguments correctly.", () => {
-  const result = CLASS.Snappy("colors", "transform")
-
-  expect(result).toBe("transition-colors duration-[250ms] transition-transform")
-})
