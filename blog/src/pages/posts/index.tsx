@@ -31,6 +31,7 @@ export const getStaticProps = async () => {
       title: frontmatter.title,
       date: frontmatter.date,
       slug: frontmatter.slug ?? "",
+      tags: frontmatter.tags ?? "",
     };
   });
 
@@ -65,13 +66,19 @@ export default function Page(context: { posts: any[] }) {
                 "rounded",
                 "shadow-lg",
                 THEME.colors.textPrimary,
-                CLASS.Snappy("transition-transform"),
-                "hover:scale-[101%]"
+                CLASS.Snappy("transition-transform")
               )}
               href={`/posts/${p.slug}`}
               key={p.slug}
             >
-              <h1 className="text-2xl">{p.title}</h1>
+              <div className="flex justify-between">
+                <p className="text-2xl">{p.title}</p>
+                <div className="flex gap-2">
+                  {p.tags?.map((t) => {
+                    return <p className="text-sm">#{t}</p>;
+                  })}
+                </div>
+              </div>
               <div className="flex justify-between">
                 <p>{p.date}</p>
                 <p>{calculateDateDifference(p.date)} days ago</p>

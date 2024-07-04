@@ -18,7 +18,7 @@ export const Icon: React.FC<IconProps> = ({
     // eslint-disable-next-line @next/next/no-img-element
     <img
       style={{
-        width: width,
+        width: `clamp(50px, ${width}, 200px)`,
         height: "fit-content",
         borderRadius: borderRadius,
       }}
