@@ -6,6 +6,9 @@
       "dom.iterable",
       "esnext"
     ],
+    "types": [
+      "mdx"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
@@ -18,11 +21,20 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
+  "mdx": {
+    "plugins": [
+      [
+        "remark-frontmatter",
+        ["toml", "yaml"]
+      ],
+      "remark-gfm"
+    ]
+  },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
-, "app/layout.tsx"  ],
+    "**/*.tsx",
+    "app/layout.tsx", ],
   "exclude": [
     "node_modules"
   ]

@@ -1,22 +1,32 @@
-export const dynamic = "error";
+import { GetServerSidePropsContext } from "next";
+import { notFound } from "next/navigation";
 
-export async function generateStaticParams() {
-  const posts = [
-    {
-      slug: "post-1",
-    },
-    {
-      slug: "post-2",
-    },
-  ];
+import { MDXRemote } from "next-mdx-remote/rsc";
 
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
-}
+import fs from "fs/promises";
+import path from "path";
 
-export default function Page({ params }) {
-  console.log(params);
+export default async function Page(context: GetServerSidePropsContext) {
+  let fd: fs.FileHandle = undefined;
 
-  return <p>Post: {params.slug}</p>;
+  try {
+    fd = await fs.open(
+      path.join(process.cwd(), "src/posts", `${context.params.slug}.mdx`),
+      "r"
+    );
+  } catch (e) {
+    return notFound();
+  }
+
+  const result = await fd.readFile("utf-8");
+  fd.close();
+
+  return (
+    <MDXRemote
+      source={result}
+      options={{
+        parseFrontmatter: true,
+      }}
+    />
+  );
 }
