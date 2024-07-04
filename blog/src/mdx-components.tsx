@@ -2,6 +2,7 @@ import type { MDXComponents } from "mdx/types";
 import { THEME } from "./theme";
 import { MakeClass } from "./utilities/MakeClass";
 import { ScatterChart } from "./components/ScatterChart";
+import { DatePicker } from "./components/DatePicker";
 
 // This file allows you to provide custom React components
 // to be used in MDX files. You can import and use any
@@ -29,8 +30,7 @@ export function useMDXComponents(components?: MDXComponents): MDXComponents {
         </div>
       );
     },
-    ScatterChart: (props: React.ComponentPropsWithRef<typeof ScatterChart>) => (
-      <ScatterChart {...props} />
-    ),
+    ScatterChart: (props) => <ScatterChart {...props} />,
+    DatePicker: (props) => <DatePicker {...props} />,
   };
 }
